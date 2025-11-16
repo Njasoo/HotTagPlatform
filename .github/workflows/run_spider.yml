@@ -1,0 +1,40 @@
+name: Run Spider
+
+# 触发条件：定时 + 手动
+on:
+  schedule:
+    # 每分钟执行一次（测试用）
+    - cron: "* * * * *"
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  run-spider:
+    runs-on: ubuntu-latest
+
+    env:
+      ENV: prod
+      DJANGO_SETTINGS_MODULE: myproject.settings.prod
+      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    steps:
+      # 1️⃣ 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ 设置 Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # 3️⃣ 安装依赖
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # 4️⃣ 运行爬虫脚本并写日志
+      - name: Run spider script
+        run: |
+          echo "Spider run at $(date)" >> spider.log
+          python spiders/run_all.py >> spider.log 2>&1
