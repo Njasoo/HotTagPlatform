@@ -14,7 +14,7 @@ def fetch_weibo_hot():
     res = rq.get(url, headers=headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text, "lxml")
-    print(soup)
+    # print(soup)
     # local_dir = os.path.dirname(os.path.abspath(__file__))
     # test_path = os.path.join(local_dir, "test.txt")
     # with open(test_path, "w", encoding="utf-8") as f:

@@ -13,10 +13,10 @@ def fetch_bilibili_hot():
     res = rq.get(url, headers=headers)
     res.encoding = "utf-8"
     res = res.json()
-    local_dir = os.path.dirname(os.path.abspath(__file__))
-    test_path = os.path.join(local_dir, "test.json")
-    with open(test_path, "w", encoding="utf-8") as f:
-        json.dump(res, f, ensure_ascii=False)
+    # local_dir = os.path.dirname(os.path.abspath(__file__))
+    # test_path = os.path.join(local_dir, "test.json")
+    # with open(test_path, "w", encoding="utf-8") as f:
+    #     json.dump(res, f, ensure_ascii=False)
     data = res.get("list", {})
     res = []
     now_rank = 1

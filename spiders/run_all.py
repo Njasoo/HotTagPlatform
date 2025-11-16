@@ -31,4 +31,4 @@ if __name__ == "__main__":
             title=x["title"], rank=x["rank"], source_id=x["source"], url=x["url"]
         )
     queryset = HotItem.objects.all()
-    print(queryset)
+    # print(queryset)
