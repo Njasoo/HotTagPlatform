@@ -13,8 +13,14 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 django.setup()
 
 from hotItem.models import HotItem
+from source.models import Source
 
 if __name__ == "__main__":
+    # 我先添加三个网站的模型先
+    Source.objects.all().delete()
+    Source.objects.create(name="微博", value="weibo")
+    Source.objects.create(name="知乎", value="zhihu")
+    Source.objects.create(name="哔哩哔哩", value="bilibili")
     res_weibo = fetch_weibo_hot()
     res_zhihu = fetch_zhihu_hot()
     res_bilibili = fetch_bilibili_hot()
