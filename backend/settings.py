@@ -62,7 +62,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 CORS_ALLOW_ALL_ORIGINS = True
 
-ENV = config("ENV", default="dev")
+ENV = os.getenv("ENV", "dev")
 if ENV == "dev":
     DEBUG = True
     ALLOWED_HOSTS = []
