@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://hottagplatform.onrender.com"]  # 部署之后的域名
+ALLOWED_HOSTS = ["hottagplatform.onrender.com"]  # 部署之后的域名
 
 
 # Application definition
