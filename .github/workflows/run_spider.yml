@@ -1,10 +1,10 @@
 name: Run Spider
 
-# 触发条件：定时 + 手动
+# 触发条件：每天早上6点 + 手动触发
 on:
   schedule:
-    # 每分钟执行一次（测试用）
-    - cron: "* * * * *"
+    # 每天北京时间 06:00，注意 GitHub Actions 使用 UTC
+    - cron: "0 22 * * *"
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -33,7 +33,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      # 4️⃣ 运行爬虫脚本并写日志
+      # 4️⃣ 执行数据库迁移
+      - name: Apply Django migrations
+        run: |
+          python manage.py migrate
+
+      # 5️⃣ 运行爬虫脚本并写日志
       - name: Run spider script
         run: |
           echo "Spider run at $(date)" >> spider.log
