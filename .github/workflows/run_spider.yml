@@ -13,7 +13,7 @@ jobs:
 
     env:
       ENV: prod
-      DJANGO_SETTINGS_MODULE: myproject.settings.prod
+      DJANGO_SETTINGS_MODULE: backend.settings
       SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
