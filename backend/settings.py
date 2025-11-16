@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ["hottagplatform.onrender.com"]  # 部署之后的域名
-
 
 # Application definition
 
@@ -65,6 +62,34 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 CORS_ALLOW_ALL_ORIGINS = True
 
+ENV = config("ENV", default="dev")
+if ENV == "dev":
+    DEBUG = True
+    ALLOWED_HOSTS = []
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ["hottagplatform.onrender.com"]  # 部署之后的域名
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=os.getenv("DATABASE_URL")
+        )  # 这个DATABASE_URL会从环境变量中读取，部署之后会在那边的环境读取
+    }
+
+# DEBUG = True
+# ALLOWED_HOSTS = []
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
@@ -87,16 +112,6 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
-    "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL")
-    )  # 这个DATABASE_URL会从环境变量中读取，部署之后会在那边的环境读取
-}
 
 
 # Password validation
