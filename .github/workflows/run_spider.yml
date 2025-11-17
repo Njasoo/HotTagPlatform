@@ -3,8 +3,7 @@ name: Run Spider
 # 触发条件：每天早上6点 + 手动触发
 on:
   schedule:
-    # 每天北京时间 06:00，注意 GitHub Actions 使用 UTC
-    - cron: "*/10 * * * *"
+    - cron: "* * * * *"
   workflow_dispatch: # 允许手动触发
 
 jobs:
