@@ -43,3 +43,8 @@ jobs:
         run: |
           echo "Spider run at $(date)" >> spider.log
           python spiders/run_all.py >> spider.log 2>&1
+
+      # 6 对后端发送请求，唤醒后端
+      - name: Wake up backend
+        run: |
+          curl -X GET https://your-backend-url.onrender.com/healthcheck || true
