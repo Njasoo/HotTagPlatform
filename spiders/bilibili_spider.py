@@ -9,15 +9,15 @@ headers = {
 
 
 def fetch_bilibili_hot():
-    url = "https://s.search.bilibili.com/main/hotword"
+    url = "https://api.bilibili.com/x/web-interface/wbi/search/square?limit=50"
     res = rq.get(url, headers=headers)
     res.encoding = "utf-8"
     res = res.json()
-    # local_dir = os.path.dirname(os.path.abspath(__file__))
-    # test_path = os.path.join(local_dir, "test.json")
-    # with open(test_path, "w", encoding="utf-8") as f:
-    #     json.dump(res, f, ensure_ascii=False)
-    data = res.get("list", {})
+    local_dir = os.path.dirname(os.path.abspath(__file__))
+    test_path = os.path.join(local_dir, "test.json")
+    with open(test_path, "w", encoding="utf-8") as f:
+        json.dump(res, f, ensure_ascii=False)
+    data = res["data"]["trending"]["list"]
     res = []
     now_rank = 1
     for x in data:

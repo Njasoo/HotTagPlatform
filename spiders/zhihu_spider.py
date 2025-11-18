@@ -22,8 +22,6 @@ def fetch_zhihu_hot():
         cnt += 1
         new_obj = {"title": title, "rank": cnt, "source": "zhihu", "url": url}
         res.append(new_obj)
-        if cnt == 10:
-            break
     return res
 
 

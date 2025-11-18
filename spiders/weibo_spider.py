@@ -39,8 +39,6 @@ def fetch_weibo_hot():
         cnt += 1
         new_obj = {"title": a_tag.string, "rank": cnt, "source": "weibo", "url": link}
         res.append(new_obj)
-        if cnt == 10:
-            break
     return res
 
 
