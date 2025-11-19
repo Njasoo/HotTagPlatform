@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "hotItem",
     "corsheaders",
     "source",
+    "workcloud",
 ]
 
 # REST_FRAMEWORK = {

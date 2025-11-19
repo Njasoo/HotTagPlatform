@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("hotItem.urls")),
     path("api/", include("source.urls")),
+    path("api/", include("workcloud.urls")),
 ]

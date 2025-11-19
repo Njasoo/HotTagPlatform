@@ -21,10 +21,10 @@ def fetch_weibo_hot():
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text, "lxml")
     # print(soup)
-    local_dir = os.path.dirname(os.path.abspath(__file__))
-    test_path = os.path.join(local_dir, "test.txt")
-    with open(test_path, "w", encoding="utf-8") as f:
-        f.write(soup.prettify())
+    # local_dir = os.path.dirname(os.path.abspath(__file__))
+    # test_path = os.path.join(local_dir, "test.txt")
+    # with open(test_path, "w", encoding="utf-8") as f:
+    #     f.write(soup.prettify())
     a_tags = soup.select("td.td-02 a")
     td_01_s = soup.select("td.td-01")
     assert len(td_01_s) == len(a_tags)
