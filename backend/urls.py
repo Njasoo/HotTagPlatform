@@ -24,5 +24,4 @@ urlpatterns = [
     path("api/", include("hotItem.urls")),
     path("api/", include("source.urls")),
     path("api/", include("workcloud.urls")),
-    re_path(r"^(?!api/).*$", TemplateView.as_view(template_name="index.html")),
 ]
