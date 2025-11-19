@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -24,5 +24,5 @@ urlpatterns = [
     path("api/", include("hotItem.urls")),
     path("api/", include("source.urls")),
     path("api/", include("workcloud.urls")),
-    path("", TemplateView.as_view(template_name="index.html")),  # catch-all
+    re_path(r"^(?!api/).*$", TemplateView.as_view(template_name="index.html")),
 ]
