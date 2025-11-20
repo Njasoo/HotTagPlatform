@@ -7,6 +7,7 @@ class HotItem(models.Model):
     source = models.ForeignKey(Source, to_field="value", on_delete=models.CASCADE)
     rank = models.IntegerField()
     url = models.URLField(max_length=500)
+    category = models.CharField(max_length=255, blank=True, null=True)
     crawl_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -37,10 +37,10 @@ jobs:
         run: |
           python manage.py migrate
 
-      # 5️⃣ 运行爬虫脚本并写日志
       - name: Run spider script
         run: |
           python spiders/run_all.py
+          python classifier/app.py
       - name: Run wordcloud script
         run: |
           python splitwords/app.py
