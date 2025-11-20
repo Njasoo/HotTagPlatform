@@ -16,8 +16,10 @@ class HotItemView(ListAPIView):
     def get_queryset(self):
         queryset = HotItem.objects.all()
         source = self.request.GET.get("source", None)
+        category = self.request.query_params.get("category", None)
         if source:
-            queryset = queryset.filter(source=source).order_by(
-                "rank"
-            )  # 不赋值是不会修改queryset的
+            queryset = queryset.filter(source=source)  # 不赋值是不会修改queryset的
+        if category:
+            queryset = queryset.filter(category=category)
+        queryset = queryset.order_by("rank")
         return queryset
