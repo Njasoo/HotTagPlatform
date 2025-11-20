@@ -8,36 +8,7 @@ on:
 jobs:
   run-spider:
     runs-on: ubuntu-latest
-
-    env:
-      ENV: prod
-      DJANGO_SETTINGS_MODULE: backend.settings
-      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
     steps:
-      # 1️⃣ 检出代码
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # 2️⃣ 设置 Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.14"
-
-      # 3️⃣ 安装依赖
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      # 4️⃣ 执行数据库迁移
-      - name: Apply Django migrations
-        run: |
-          python manage.py migrate
       - name: Ping backend
         run: |
-          curl -I https://hottagplatform.onrender.com/api/hot/ \
-          -H "User-Agent: Mozilla/5.0" \
-          --max-time 30 \
-          || echo "Ping failed"
+          curl -I "https://hottagplatform.onrender.com/api/hot/" -H "User-Agent: Mozilla/5.0" --max-time 30 || echo "Ping failed"
