@@ -78,6 +78,11 @@ if ENV == "dev":
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        }
+    }
 else:
     DEBUG = False
     ALLOWED_HOSTS = ["hottagplatform.onrender.com"]  # 部署之后的域名
@@ -85,6 +90,17 @@ else:
         "default": dj_database_url.config(
             default=os.getenv("DATABASE_URL")
         )  # 这个DATABASE_URL会从环境变量中读取，部署之后会在那边的环境读取
+    }
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": os.getenv("REDIS_URL"),
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                # 可选：如果 Key-Value 服务使用 SSL，可以加 "SSL": True
+                # "SSL": True,
+            },
+        }
     }
 
 # DEBUG = True

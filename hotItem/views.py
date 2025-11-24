@@ -2,6 +2,8 @@ from .models import HotItem
 from .serializers import HotItemSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class HotItemPagination(PageNumberPagination):
@@ -12,6 +14,10 @@ class HotItemPagination(PageNumberPagination):
 class HotItemView(ListAPIView):
     serializer_class = HotItemSerializer
     pagination_class = HotItemPagination
+
+    @method_decorator(cache_page(60 * 60))  # 存一个小时
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         queryset = HotItem.objects.all()
