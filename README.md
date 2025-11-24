@@ -3,7 +3,7 @@
 HotTagPlatform 后端服务，为前端和移动端提供 **实时热榜数据 API**。  
 支持多来源、多分类热榜查询，并结合缓存优化访问性能。
 
-在线网站（需要 VPN 或境外访问）: htpf.vercel.app
+在线网站（需要 VPN 或境外访问）: https://htpf.vercel.app
 
 主要功能：
 
