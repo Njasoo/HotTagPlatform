@@ -71,7 +71,7 @@ if __name__ == "__main__":
         run(source)
 
     # 清空缓存
-    from django.core.cache import cache
+    # from django.core.cache import cache
 
-    cache.clear()
-    print("缓存已清除")
+    # cache.clear()
+    # print("缓存已清除")
