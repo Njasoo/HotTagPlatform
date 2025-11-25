@@ -66,6 +66,6 @@ def run(source):
 
 if __name__ == "__main__":
     WordCloud.objects.all().delete()
-    source_list = ["weibo", "bilibili", "zhihu"]
+    source_list = ["weibo", "bilibili", "zhihu", "tieba"]
     for source in source_list:
         run(source)
