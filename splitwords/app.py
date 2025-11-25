@@ -69,3 +69,9 @@ if __name__ == "__main__":
     source_list = ["weibo", "bilibili", "zhihu", "tieba"]
     for source in source_list:
         run(source)
+
+    # 清空缓存
+    from django.core.cache import cache
+
+    cache.clear()
+    print("缓存已清除")

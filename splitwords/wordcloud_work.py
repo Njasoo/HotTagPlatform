@@ -31,8 +31,10 @@ def get_wordcloud(top_words):
         font_path=font_file_path,
         width=1000,
         height=1000,
-        background_color="white",
+        background_color=None,
+        mode="RGBA",
         mask=circle_mask,
+        colormap="tab10",
     )
 
     wc.generate_from_frequencies(freq_dict)  # 用词频字典生成词云
@@ -42,9 +44,16 @@ def get_wordcloud(top_words):
 
     # 显示
     plt.imshow(wc)  # 这里是把图像画出来
+    # ❗确保背景是透明的
+    plt.gca().set_facecolor("none")
+    plt.axis("off")
     plt.axis("off")  # 关闭坐标轴
     plt.savefig(
-        buffer, format="svg", bbox_inches="tight", pad_inches=0  # svg矢量图
+        buffer,
+        format="svg",
+        bbox_inches="tight",
+        pad_inches=0,
+        transparent=True,  # svg矢量图
     )  # save到内存里面
     plt.close()
 
