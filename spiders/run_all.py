@@ -1,6 +1,7 @@
 from weibo_spider import fetch_weibo_hot
 from zhihu_spider import fetch_zhihu_hot
 from bilibili_spider import fetch_bilibili_hot
+from tieba_spider import fetch_tieba_hot
 import os
 import django
 import sys
@@ -21,10 +22,12 @@ if __name__ == "__main__":
     Source.objects.create(name="微博", value="weibo")
     Source.objects.create(name="知乎", value="zhihu")
     Source.objects.create(name="哔哩哔哩", value="bilibili")
+    Source.objects.create(name="贴吧", value="tieba")
     res_weibo = fetch_weibo_hot()
     res_zhihu = fetch_zhihu_hot()
     res_bilibili = fetch_bilibili_hot()
-    res = res_weibo + res_bilibili + res_zhihu
+    res_tieba = fetch_tieba_hot()
+    res = res_weibo + res_bilibili + res_zhihu + res_tieba
     HotItem.objects.all().delete()
     for x in res:
         HotItem.objects.create(
