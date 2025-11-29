@@ -4,6 +4,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.db.models import Q
 
 
 class HotItemPagination(PageNumberPagination):
@@ -22,10 +23,14 @@ class HotItemView(ListAPIView):
     def get_queryset(self):
         queryset = HotItem.objects.all()
         source = self.request.GET.get("source", None)
-        category = self.request.query_params.get("category", None)
+        categories = self.request.query_params.getlist(
+            "categories", None
+        )  # 列表要用getlist
+        print("categories:", categories)
         if source:
             queryset = queryset.filter(source=source)  # 不赋值是不会修改queryset的
-        if category:
-            queryset = queryset.filter(category=category)
+        queryset = queryset.filter(
+            category__in=categories
+        )  # 相当于category在categories当中出现的行就会返回
         queryset = queryset.order_by("rank")
         return queryset
